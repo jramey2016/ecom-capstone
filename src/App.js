@@ -1,6 +1,5 @@
 import './categories.stles.scss'
-import CategoryItem from './components/category-item/category-item.component';
-
+import Directory from './components/directory/directory.component';
 
 const App = () => {
   const categories = [
@@ -29,15 +28,11 @@ const App = () => {
       "title": "Mens",
       "imageUrl": "https://i.ibb.co/R70vBrQ/men.png"
     }
-  ]
+  ];
   
   return (
-    <div className = "category-container">
-      {categories.map((category) => (
-        <CategoryItem key={category.id} category={category} />
-  ))}
-    </div>
-  )
+      <Directory categories={categories} />
+  );
 }
 
 export default App;
