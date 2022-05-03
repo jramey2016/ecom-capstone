@@ -3,7 +3,6 @@ import { signInWithGooglePopup, createUserDocumentFromAuth, signInAuthUserWithEm
 import FormInput from '../form-input/form-input.component';
 import './sign-in-form.styles.scss'
 import Button from '../button/button.component';
-import { UserContext } from '../../context/user.context';
 
 const defaultformFields = {
     email: '',
@@ -12,18 +11,16 @@ const defaultformFields = {
 
 
 const SignInForm = () => {
+
     const [formFields, setFormFields] = useState(defaultformFields);
     const { email, password } = formFields;
-
-    const {setCurrentUser} = useContext(UserContext)
 
     const resetFormFields = () => {
         setFormFields(defaultformFields);
     }
 
     const signInWithGoogle = async() => {
-        const {user} = await signInWithGooglePopup();
-        await createUserDocumentFromAuth(user);
+        await signInWithGooglePopup();
     }
 
     const handleSubmit = async (event) => {
@@ -31,7 +28,6 @@ const SignInForm = () => {
 
         try{
             const { user } = await signInAuthUserWithEmailAndPassword(email, password);
-            setCurrentUser(user);
             resetFormFields();
 
         } catch(error){
@@ -64,7 +60,7 @@ const SignInForm = () => {
                 <FormInput label='Password' type= 'password' required onChange={handleChange} name='password' value={password}/>
                 <div className='buttons-container'>
                     <Button type='submit'>Sign In</Button>
-                    <Button type='button' buttonType='google' onClick={signInWithGoogle}>Google Sign In</Button>
+                    <Button type='button' buttonType='google' onClick={signInWithGoogle}>Sign In Google</Button>
                 </div>
             </form>
         </div>
